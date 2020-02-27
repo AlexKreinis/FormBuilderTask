@@ -1,0 +1,23 @@
+{
+  "name": "formbuilder",
+  "version": "1.0.0",
+  "description": "Form builder for wix home project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server \" \"npm run client\""
+  },
+  "author": "Alex Kreinis",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.2.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
