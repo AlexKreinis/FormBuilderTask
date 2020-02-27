@@ -1,10 +1,14 @@
-html {
-  padding: none;
-  margin: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.background {
-  background: #f5f5f5;
-
+body {
+  font-family: "Lato", sans-serif;
+  color: #777;
   height: 100vh;
-  width: 100%;
+
+  background-image: url(./images//cool-background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }

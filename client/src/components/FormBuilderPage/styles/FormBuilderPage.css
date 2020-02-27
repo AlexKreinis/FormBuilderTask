@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  padding: 10px;
+  margin-top: 10vh;
+  height: 80vh;
+  width: 50vw;
+  min-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-gap: 20px;
+}
+
+.generatedForm {
+  grid-row: 2/8;
+  grid-column: 3/-4;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #abb2b9;
+  -webkit-box-shadow: 1px 0px 28px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 0px 28px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 0px 28px -6px rgba(0, 0, 0, 0.75);
+}
+.AddFieldButton {
+  grid-row: 1/2;
+  grid-column: 3/4;
+  width: 200px;
+  height: 50px;
+}
+
+.AddTitleButton {
+  grid-row: 1/2;
+  grid-column: 5/6;
+  width: 200px;
+  height: 50px;
+}
+.SaveFormButton {
+  grid-row: 8/9;
+  grid-column: 3/4;
+  width: 200px;
+  height: 50px;
+}
+.CancelButton {
+  grid-row: 8/9;
+  grid-column: 5/6;
+  width: 200px;
+  height: 50px;
+}

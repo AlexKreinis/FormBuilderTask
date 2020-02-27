@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
-import "../styles/FormBuilder.css";
+import "../styles/FieldGenerator.css";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const FieldGenerator = ({ AddField }) => {
+const FieldGenerator = ({ AddField, handleClose }) => {
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
 
@@ -52,8 +52,8 @@ const FieldGenerator = ({ AddField }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("submitting!");
     AddField(singleFieldData);
+    handleClose();
   };
 
   const { fieldLabel, inputName, inputType } = singleFieldData;

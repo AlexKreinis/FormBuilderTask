@@ -4,6 +4,8 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import FieldGenerator from "./FieldGenerator";
+import FormNameGenerator from "./FormNameGenerator";
+import { FORMNAME, FIELDGENERATOR } from "../constants/Types";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -18,11 +20,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TransitionsModal({ open, setOpen, AddField }) {
+export default function TransitionsModal({
+  open,
+  setOpen,
+  AddField,
+  AddFormName,
+  modalChoice
+}) {
   const classes = useStyles();
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const whatModalToShow = () => {
+    console.log(modalChoice);
+    if (modalChoice === FORMNAME) {
+      return (
+        <FormNameGenerator
+          AddFormName={AddFormName}
+          handleClose={handleClose}
+        />
+      );
+    } else if (modalChoice === FIELDGENERATOR) {
+      return <FieldGenerator AddField={AddField} handleClose={handleClose} />;
+    }
   };
 
   return (
@@ -40,9 +61,7 @@ export default function TransitionsModal({ open, setOpen, AddField }) {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-            <FieldGenerator AddField={AddField} />
-          </div>
+          <div className={classes.paper}>{whatModalToShow()}</div>
         </Fade>
       </Modal>
     </div>

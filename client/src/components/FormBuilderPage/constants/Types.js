@@ -1,0 +1,2 @@
+export const FORMNAME = "FORMNAME";
+export const FIELDGENERATOR = "FIELDGENERATOR";
