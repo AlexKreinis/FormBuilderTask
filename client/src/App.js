@@ -12,7 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" render={() => <FormListPage />} />
         <Route exact path="/formbuilder" component={FormBuilderPage} />
-        <Route exact path="/submitpage/:id" render={() => <FormSubmitPage />} />
+        <Route exact path="/submitpage/:id" component={FormSubmitPage} />
         <Route
           exact
           path="/submissionpage/:id"

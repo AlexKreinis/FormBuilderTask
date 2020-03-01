@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
+import { v4 as uuidv4 } from "uuid";
 import "../styles/FieldGenerator.css";
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +27,6 @@ const useStyles = makeStyles(theme => ({
 const FieldGenerator = ({ AddField, handleClose }) => {
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
-
   const makeTypesForSelect = () => {
     const types = ["text", "color", "date", "email", "tel", "number"];
     return types.map((type, index) => (
@@ -43,7 +43,8 @@ const FieldGenerator = ({ AddField, handleClose }) => {
   const [singleFieldData, setSingleFieldData] = useState({
     fieldLabel: "",
     inputName: "",
-    inputType: ""
+    inputType: "",
+    id: ""
   });
 
   const onChange = e => {
@@ -57,6 +58,13 @@ const FieldGenerator = ({ AddField, handleClose }) => {
   };
 
   const { fieldLabel, inputName, inputType } = singleFieldData;
+
+  useEffect(() => {
+    setSingleFieldData(prevSingleFieldData => ({
+      ...prevSingleFieldData,
+      id: uuidv4()
+    }));
+  }, []);
 
   const classes = useStyles();
 

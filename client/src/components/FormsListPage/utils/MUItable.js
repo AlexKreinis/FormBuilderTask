@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -43,23 +43,11 @@ function createData(id, formname, Submissions, submitpage, submissionpage) {
   return { id, formname, Submissions, submitpage, submissionpage };
 }
 
-const rows = [
-  createData("1", "Task Feedback", 0, "aaa", "aaa"),
-  createData("2", "Task Feedback", 0, "aaa", "aaa"),
-  createData("2", "Task Feedback", 0, "aaa", "aaa"),
-  createData("2", "Task Feedback", 0, "aaa", "aaa"),
-  createData("2", "Task Feedback", 0, "aaa", "aaa"),
-  createData("2", "Task Feedback", 0, "aaa", "aaa")
-];
-
 const useStyles = makeStyles({
   root: {
     width: "80%",
     margin: "auto"
   },
-  // container: {
-  //   maxHeight: 440
-  // },
   toolbar: {
     display: "flex",
     justifyContent: "space-between",
@@ -68,10 +56,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable({ forms }) {
+  const [rows, setRows] = useState([]);
+  useEffect(() => {
+    let formData = forms.map((form, index) =>
+      createData(index, form[0], form[1], form[2], form[2])
+    );
+    setRows(formData);
+  }, [forms]);
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -80,6 +76,66 @@ export default function StickyHeadTable() {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+  const showMessageIfTableEmpty = () => {
+    if (rows.length === 0) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <p>You don't have any forms, click on the icon to add some</p>
+          <Tooltip title="Add new form">
+            <Link to="/formbuilder">
+              <IconButton aria-label="Add">
+                <NoteAddIcon fontSize="large" />
+              </IconButton>
+            </Link>
+          </Tooltip>
+        </div>
+      );
+    } else {
+      return (
+        <TableContainer className={classes.container}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map(column => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                      {columns.map(column => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {checkColumnIfLinkOrValue(value, column.id)}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
+    }
   };
   const checkColumnIfLinkOrValue = (value, id) => {
     if (id === "submitpage") {
@@ -120,41 +176,7 @@ export default function StickyHeadTable() {
           </Tooltip>
         </div>
       </Toolbar>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(row => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map(column => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {checkColumnIfLinkOrValue(value, column.id)}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {showMessageIfTableEmpty()}
       <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"

@@ -21,7 +21,7 @@ const FormNameGenerator = ({ AddFormName, handleClose }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Typography variant="h4" component="h2" gutterBottom>
-        Add form name
+        Edit form name
       </Typography>
       <TextField
         id="outlined-helperText"

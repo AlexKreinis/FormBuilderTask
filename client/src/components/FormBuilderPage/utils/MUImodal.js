@@ -33,7 +33,6 @@ export default function TransitionsModal({
     setOpen(false);
   };
   const whatModalToShow = () => {
-    console.log(modalChoice);
     if (modalChoice === FORMNAME) {
       return (
         <FormNameGenerator
