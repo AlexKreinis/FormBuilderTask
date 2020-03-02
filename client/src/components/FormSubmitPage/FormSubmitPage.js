@@ -17,24 +17,27 @@ const FormSubmitPage = ({ match, history }) => {
     (async function getFormDetails() {
       let formData = await getForm(match.params.id);
       setFormName(formData.formName);
-      setFormFields(formData.fields);
+      setFormFields(formData.inputs);
       setIsLoading(false);
     })();
   }, [match.params.id]);
 
-  const onChange = e => {
-    console.log("changing\n");
-    console.log(e.target.name, e.target.value);
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e, id) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: { value: e.target.value, refId: id }
+    });
   };
   const returnToMainpage = () => {
     history.push("/");
   };
-  const onSubmit = e => {
-    console.log("entered");
+  const onSubmit = async e => {
     e.preventDefault();
-    console.log(formData);
-    AddFormData();
+    let res = await AddFormData({ formData, id: match.params.id });
+    console.log(res);
+    if (res === "Success") {
+      history.push("/");
+    }
   };
 
   const makeForm = () => {
@@ -53,7 +56,7 @@ const FormSubmitPage = ({ match, history }) => {
             type={inputData.inputType}
             margin="normal"
             style={{ width: 200 }}
-            onChange={onChange}
+            onChange={e => onChange(e, inputData._id)}
           />
         </div>
       );

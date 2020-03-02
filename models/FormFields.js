@@ -2,34 +2,24 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FormFieldsSchema = new Schema({
-  formName: {
+  fieldLabel: {
     type: String,
     required: true
   },
-  fields: [
+  inputName: {
+    type: String,
+    required: true
+  },
+  inputType: {
+    type: String,
+    required: true
+  },
+  inputData: [
     {
-      fieldLabel: {
-        type: String,
-        required: true
-      },
-      inputName: {
-        type: String,
-        required: true
-      },
-      inputType: {
-        type: String,
-        required: true
-      },
-      inputData: {
-        type: mongoose.Schema.ObjectId,
-        ref: "UserData"
-      }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "FormData"
     }
-  ],
-  submits: {
-    type: Number,
-    default: 0
-  }
+  ]
 });
 
 module.exports = FormFields = mongoose.model("FormFields", FormFieldsSchema);

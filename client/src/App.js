@@ -16,7 +16,7 @@ function App() {
         <Route
           exact
           path="/submissionpage/:id"
-          render={() => <FormSubmissionPage />}
+          component={FormSubmissionPage}
         />
       </Switch>
     </Router>

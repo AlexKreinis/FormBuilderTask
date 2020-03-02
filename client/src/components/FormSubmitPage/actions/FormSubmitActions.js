@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const AddFormData = async (formName, allInputsData) => {
+export const AddFormData = async formData => {
   const config = {
     headers: {
       "Content-type": "application/json"
     }
   };
-  const body = JSON.stringify({ formName, allInputsData });
+  const body = JSON.stringify(formData);
   try {
     let res = await axios.put(`/api/form/addformdata`, body, config);
-    return res;
+    return res.data;
   } catch (err) {
     if (err.response.status === 404) {
       return "Error";
