@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Odibee+Sans|Open+Sans&display=swap");
+
 .FormSubmitPage {
   display: flex;
   justify-content: center;
@@ -11,4 +14,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-y: scroll;
+}
+.formParagraph {
+  font-family: "Open Sans", sans-serif;
+  color: #212f3d;
+  display: flex;
+}
+.formTitle {
+  font-family: "Odibee Sans", cursive;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.formButtons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
 }

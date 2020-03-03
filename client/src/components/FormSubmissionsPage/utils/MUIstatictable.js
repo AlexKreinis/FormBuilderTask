@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: "white"
+    backgroundColor: " #eaf2f8 "
   }
 }));
 
@@ -22,7 +22,7 @@ export default function ListDividers({ submissions, history }) {
   const makeLists = () => {
     return submissions.map((header, index) => {
       return (
-        <List component="nav" className={classes.root}>
+        <List component="nav" className={classes.root} key={index}>
           <ListItem>
             <ListItemAvatar>
               <Avatar>
@@ -34,7 +34,7 @@ export default function ListDividers({ submissions, history }) {
           <Divider />
           {header.inputData.map((row, index) => {
             return (
-              <ListItem>
+              <ListItem key={index}>
                 <ListItemText primary={row.value} />
               </ListItem>
             );
@@ -47,9 +47,8 @@ export default function ListDividers({ submissions, history }) {
     <div
       style={{
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 300
+
+        alignItems: "center"
       }}
     >
       {makeLists()}

@@ -12,13 +12,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SimpleBackdrop({ open }) {
   const classes = useStyles();
-  //   const handleClose = () => {
-  //     setOpen(false);
-  //   };
-  //   const handleToggle = () => {
-  //     setOpen(!open);
-  //   };
-
   return (
     <div>
       <Backdrop className={classes.backdrop} open={open}>

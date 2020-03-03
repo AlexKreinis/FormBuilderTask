@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./styles/FormSubmitPage.css";
 import MUIdropback from "../LoadingSpinner/MUIdropback";
+import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 
 import { getForm, AddFormData } from "./actions/FormSubmitActions";
 
@@ -34,7 +35,6 @@ const FormSubmitPage = ({ match, history }) => {
   const onSubmit = async e => {
     e.preventDefault();
     let res = await AddFormData({ formData, id: match.params.id });
-    console.log(res);
     if (res === "Success") {
       history.push("/");
     }
@@ -69,16 +69,29 @@ const FormSubmitPage = ({ match, history }) => {
         <Card>
           <form className="FormContainer" onSubmit={onSubmit}>
             <div>
-              <p>You can submit your form here</p>
-              <h1>{formName}</h1>
+              <div className="formParagraph">
+                <div>
+                  <AddToHomeScreenIcon />
+                </div>
+                <div>
+                  <p>You can submit your form here</p>
+                </div>
+              </div>
+
+              <div className="formTitle">
+                <h1>{formName}</h1>
+              </div>
             </div>
             {makeForm()}
-            <div>
-              {!isLoading && (
-                <>
+
+            {!isLoading && (
+              <div className="formButtons">
+                <div>
                   <Button variant="contained" color="primary" type="submit">
                     Submit
                   </Button>
+                </div>
+                <div>
                   <Button
                     variant="contained"
                     color="secondary"
@@ -87,9 +100,9 @@ const FormSubmitPage = ({ match, history }) => {
                   >
                     Cancel
                   </Button>
-                </>
-              )}
-            </div>
+                </div>
+              </div>
+            )}
           </form>
         </Card>
       </div>
