@@ -13,6 +13,7 @@ const FormSubmitPage = ({ match, history }) => {
   const [formFields, setFormFields] = useState([]);
   const [formName, setFormName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const successMessage = "Success";
 
   useEffect(() => {
     (async function getFormDetails() {
@@ -35,7 +36,7 @@ const FormSubmitPage = ({ match, history }) => {
   const onSubmit = async e => {
     e.preventDefault();
     let res = await AddFormData({ formData, id: match.params.id });
-    if (res === "Success") {
+    if (res === successMessage) {
       history.push("/");
     }
   };
@@ -54,6 +55,7 @@ const FormSubmitPage = ({ match, history }) => {
             label={inputData.fieldLabel}
             name={inputData.inputName}
             type={inputData.inputType}
+            required
             margin="normal"
             style={{ width: 200 }}
             onChange={e => onChange(e, inputData._id)}

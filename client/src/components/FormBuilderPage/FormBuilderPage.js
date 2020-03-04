@@ -33,6 +33,7 @@ const FormBuilderPage = ({ history }) => {
   const [modalChoice, setModalChoice] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const errorMessage = "Error";
 
   const openFormNameModal = () => {
     setModalChoice(FORMNAME);
@@ -92,24 +93,34 @@ const FormBuilderPage = ({ history }) => {
     }
     return false;
   };
-  const submitForm = async e => {
-    e.preventDefault();
-    setIsLoading(true);
-    if (notCompleteForm()) {
-      setDialogMessage(NOTCOMPLETEFORM);
-      setOpenDialog(true);
-      setIsLoading(false);
-      return;
-    }
-    await setDialogMessage("");
-    let ans = await AddFormFields(formName, allInputsData);
-    if (ans === "Error") {
-      setDialogMessage(SERVER_ERROR);
-    }
+  const showNotCompleteMessage = () => {
+    setDialogMessage(NOTCOMPLETEFORM);
+    setOpenDialog(true);
+    setIsLoading(false);
+  };
+  const showBackendErrorMessage = () => {
+    setDialogMessage(SERVER_ERROR);
+  };
+
+  const showFormCompleteMessage = () => {
     setAllInputsData([]);
     setFormName("");
     setOpenDialog(true);
     setIsLoading(false);
+  };
+  const submitForm = async e => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (notCompleteForm()) {
+      showNotCompleteMessage();
+      return;
+    }
+    await setDialogMessage("");
+    let ansFromBackend = await AddFormFields(formName, allInputsData);
+    if (ansFromBackend === errorMessage) {
+      showBackendErrorMessage();
+    }
+    showFormCompleteMessage();
   };
 
   const returnToMainPage = () => {
@@ -164,6 +175,7 @@ const FormBuilderPage = ({ history }) => {
           Cancel
         </Button>
         <MUImodal
+          allInputsData={allInputsData}
           open={openModal}
           setOpen={setOpenModal}
           AddField={AddField}

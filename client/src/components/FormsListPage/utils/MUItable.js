@@ -58,16 +58,17 @@ const useStyles = makeStyles({
 
 export default function StickyHeadTable({ forms }) {
   const [rows, setRows] = useState([]);
+
   useEffect(() => {
-    let formData = forms.map((form, index) =>
-      createData(index, form[0], form[1], form[2], form[2])
+    let generateRowsFromForms = forms.map((form, index) =>
+      createData(index + 1, form[0], form[1], form[2], form[2])
     );
-    setRows(formData);
+    setRows(generateRowsFromForms);
   }, [forms]);
 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(2);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -160,12 +161,14 @@ export default function StickyHeadTable({ forms }) {
       );
     } else return value;
   };
+
   return (
     <Paper className={classes.root}>
       <Toolbar className={classes.toolbar}>
         <div>
           <h3>Form Table</h3>
         </div>
+
         <div>
           <Tooltip title="Add new form">
             <Link to="/formbuilder">
@@ -176,9 +179,11 @@ export default function StickyHeadTable({ forms }) {
           </Tooltip>
         </div>
       </Toolbar>
+
       {showMessageIfTableEmpty()}
+
       <TablePagination
-        rowsPerPageOptions={[5, 10, 15]}
+        rowsPerPageOptions={[2, 4, 6]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

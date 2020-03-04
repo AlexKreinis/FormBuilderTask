@@ -25,7 +25,8 @@ export default function TransitionsModal({
   setOpen,
   AddField,
   AddFormName,
-  modalChoice
+  modalChoice,
+  allInputsData
 }) {
   const classes = useStyles();
 
@@ -41,7 +42,13 @@ export default function TransitionsModal({
         />
       );
     } else if (modalChoice === FIELDGENERATOR) {
-      return <FieldGenerator AddField={AddField} handleClose={handleClose} />;
+      return (
+        <FieldGenerator
+          AddField={AddField}
+          handleClose={handleClose}
+          allInputsData={allInputsData}
+        />
+      );
     }
   };
 

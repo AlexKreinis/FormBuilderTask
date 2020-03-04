@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const FieldGenerator = ({ AddField, handleClose }) => {
+const FieldGenerator = ({ AddField, handleClose, allInputsData }) => {
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   const makeTypesForSelect = () => {
@@ -47,12 +47,38 @@ const FieldGenerator = ({ AddField, handleClose }) => {
     id: ""
   });
 
+  const clearErrorOnDuplicate = () => {
+    setIsError(false);
+    setErrorMessage("");
+  };
+  const setErrorMessageOnDuplicate = () => {
+    setErrorMessage("Name allready exists");
+    setIsError(true);
+  };
   const onChange = e => {
+    if (isError) {
+      clearErrorOnDuplicate();
+    }
     setSingleFieldData({ ...singleFieldData, [e.target.name]: e.target.value });
   };
 
+  const checkIfNameExist = () => {
+    for (let index = 0; index < allInputsData.length; index++) {
+      if (allInputsData[index].inputName === singleFieldData.inputName) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isError, setIsError] = useState(false);
   const handleSubmit = e => {
     e.preventDefault();
+    if (checkIfNameExist()) {
+      setErrorMessageOnDuplicate();
+      return;
+    }
+    clearErrorOnDuplicate();
     AddField(singleFieldData);
     handleClose();
   };
@@ -79,20 +105,22 @@ const FieldGenerator = ({ AddField, handleClose }) => {
       <div>
         <TextField
           id="outlined-helperText"
-          label="Label name"
-          name="fieldLabel"
-          value={fieldLabel}
+          label="Input name"
+          name="inputName"
+          value={inputName}
           variant="outlined"
           onChange={onChange}
+          helperText={errorMessage}
+          error={isError}
         />
       </div>
 
       <div>
         <TextField
           id="outlined-helperText"
-          label="Input name"
-          name="inputName"
-          value={inputName}
+          label="Label name"
+          name="fieldLabel"
+          value={fieldLabel}
           variant="outlined"
           onChange={onChange}
         />
@@ -132,6 +160,7 @@ const FieldGenerator = ({ AddField, handleClose }) => {
           </Fab>
         </Tooltip>
       </div>
+      <p></p>
     </form>
   );
 };
