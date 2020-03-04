@@ -1,0 +1,11 @@
+.showTable {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.errorMessage {
+  color: white;
+  font-size: 50px;
+}

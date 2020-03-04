@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CancelIcon from "@material-ui/icons/Cancel";
+import PropTypes from "prop-types";
 
 import MUImodal from "./utils/MUImodal.js";
 import MUIdialog from "./utils/MUIdialog.js";
@@ -115,7 +116,7 @@ const FormBuilderPage = ({ history }) => {
       showNotCompleteMessage();
       return;
     }
-    await setDialogMessage("");
+    setDialogMessage("");
     let ansFromBackend = await AddFormFields(formName, allInputsData);
     if (ansFromBackend === errorMessage) {
       showBackendErrorMessage();
@@ -191,6 +192,10 @@ const FormBuilderPage = ({ history }) => {
       </Card>
     </div>
   );
+};
+
+FormBuilderPage.propTypes = {
+  history: PropTypes.object.isRequired
 };
 
 export default FormBuilderPage;

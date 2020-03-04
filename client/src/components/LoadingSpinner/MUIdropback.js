@@ -2,6 +2,7 @@ import React from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
@@ -20,3 +21,7 @@ export default function SimpleBackdrop({ open }) {
     </div>
   );
 }
+
+SimpleBackdrop.propTypes = {
+  open: PropTypes.bool.isRequired
+};

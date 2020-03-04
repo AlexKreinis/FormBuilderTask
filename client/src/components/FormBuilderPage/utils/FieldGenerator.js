@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
+import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/FieldGenerator.css";
 
@@ -165,4 +166,9 @@ const FieldGenerator = ({ AddField, handleClose, allInputsData }) => {
   );
 };
 
+FieldGenerator.propTypes = {
+  AddField: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  allInputsData: PropTypes.array.isRequired
+};
 export default FieldGenerator;

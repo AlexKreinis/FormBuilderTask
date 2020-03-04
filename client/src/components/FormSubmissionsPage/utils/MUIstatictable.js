@@ -7,6 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ListDividers({ submissions, history }) {
+export default function ListDividers({ submissions }) {
   const classes = useStyles();
 
   const makeLists = () => {
@@ -55,3 +56,6 @@ export default function ListDividers({ submissions, history }) {
     </div>
   );
 }
+ListDividers.propTypes = {
+  submissions: PropTypes.array.isRequired
+};

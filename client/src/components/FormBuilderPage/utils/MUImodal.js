@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import FieldGenerator from "./FieldGenerator";
 import FormNameGenerator from "./FormNameGenerator";
+import PropTypes from "prop-types";
 import { FORMNAME, FIELDGENERATOR } from "../constants/Types";
 
 const useStyles = makeStyles(theme => ({
@@ -73,3 +74,11 @@ export default function TransitionsModal({
     </div>
   );
 }
+TransitionsModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  AddField: PropTypes.func.isRequired,
+  AddFormName: PropTypes.func.isRequired,
+  modalChoice: PropTypes.string.isRequired,
+  allInputsData: PropTypes.array.isRequired
+};

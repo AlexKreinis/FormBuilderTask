@@ -44,6 +44,7 @@
   grid-column: 6/7;
   height: 30px;
   align-self: end;
+  width: 90px;
 }
 .SaveFormButton {
   grid-row: 8/9;
@@ -51,6 +52,7 @@
   height: 50px;
 }
 .CancelButton {
+  width: 90px;
   grid-row: 8/9;
   grid-column: 3/4;
   height: 50px;

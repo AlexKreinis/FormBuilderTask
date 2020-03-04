@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
+import PropTypes from "prop-types";
 
 const FormNameGenerator = ({ AddFormName, handleClose }) => {
   const [formName, setFormName] = useState("");
@@ -46,5 +47,8 @@ const FormNameGenerator = ({ AddFormName, handleClose }) => {
     </form>
   );
 };
-
+FormNameGenerator.propTypes = {
+  AddFormName: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired
+};
 export default FormNameGenerator;

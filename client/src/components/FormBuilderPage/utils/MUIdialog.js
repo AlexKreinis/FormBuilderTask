@@ -6,6 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 
 import { withRouter } from "react-router-dom";
@@ -92,5 +93,12 @@ const ResponsiveDialog = ({ open, setOpen, history, message }) => {
       </Dialog>
     </div>
   );
+};
+
+ResponsiveDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  message: PropTypes.string.isRequired
 };
 export default withRouter(ResponsiveDialog);
