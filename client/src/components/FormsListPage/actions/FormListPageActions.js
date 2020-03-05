@@ -5,8 +5,9 @@ export const getAllForms = async () => {
     const res = await axios.get(`/api/form/getforms`);
     return res.data;
   } catch (err) {
+    const ErrorMessage = "Error";
     if (err.response.status === 404) {
-      return "Error";
+      return ErrorMessage;
     }
     return err.response.data;
   }

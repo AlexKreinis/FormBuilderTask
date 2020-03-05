@@ -7,12 +7,14 @@ export const AddFormFields = async (formName, allInputsData) => {
     }
   };
   const body = JSON.stringify({ formName, allInputsData });
+
   try {
     let res = await axios.post(`/api/form/addfields`, body, config);
     return res;
   } catch (err) {
+    const ErrorMessage = "Error";
     if (err.response.status === 404) {
-      return "Error";
+      return ErrorMessage;
     }
     return err.response.data;
   }
