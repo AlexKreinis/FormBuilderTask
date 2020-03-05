@@ -27,7 +27,7 @@ const FormListPage = () => {
     })();
   }, []);
 
-  const successMessage = () => {
+  const successResponse = () => {
     return (
       <>
         <MUItable forms={forms} />
@@ -36,15 +36,15 @@ const FormListPage = () => {
     );
   };
 
-  const errorMessage = () => {
+  const errorResponse = () => {
     return <div className="errorMessage ">Something went wrong,try again</div>;
   };
 
   const showForms = () => {
     if (isError) {
-      return errorMessage();
+      return errorResponse();
     }
-    return successMessage();
+    return successResponse();
   };
 
   return <div className="showTable">{showForms()}</div>;

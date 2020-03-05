@@ -15,13 +15,13 @@ const FormSubmitPage = ({ match, history }) => {
   const [formName, setFormName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const successMessage = "Success";
-  const errorMessage = "Error";
+  const SuccessMessage = "Success";
+  const ErrorMessage = "Error";
 
   useEffect(() => {
     (async function getFormDetails() {
       let formData = await getForm(match.params.id);
-      if (formData === errorMessage) {
+      if (formData === ErrorMessage) {
         setIsError(true);
       } else {
         setFormName(formData.formName);
@@ -43,7 +43,7 @@ const FormSubmitPage = ({ match, history }) => {
   const onSubmit = async e => {
     e.preventDefault();
     let res = await AddFormData({ formData, id: match.params.id });
-    if (res === successMessage) {
+    if (res === SuccessMessage) {
       history.push("/");
     }
   };
@@ -114,7 +114,7 @@ const FormSubmitPage = ({ match, history }) => {
     );
   };
 
-  const showErrorMessage = () => {
+  const errorResponse = () => {
     return (
       <div className="errorMessage">
         <div>
@@ -137,7 +137,7 @@ const FormSubmitPage = ({ match, history }) => {
 
   const showSubmitPage = () => {
     if (isError) {
-      return showErrorMessage();
+      return errorResponse();
     }
     return successResponse();
   };

@@ -26,7 +26,7 @@ const FormSubmissionPage = ({ match, history }) => {
     })();
   }, [match]);
 
-  const successMessage = () => {
+  const successResponse = () => {
     return (
       <>
         <div className="header">
@@ -45,7 +45,7 @@ const FormSubmissionPage = ({ match, history }) => {
     );
   };
 
-  const errorMessage = () => {
+  const errorResponse = () => {
     return (
       <>
         <div className="header">
@@ -62,9 +62,9 @@ const FormSubmissionPage = ({ match, history }) => {
 
   const showSubmissions = () => {
     if (isError) {
-      return errorMessage();
+      return errorResponse();
     }
-    return successMessage();
+    return successResponse();
   };
   const returnToMain = () => {
     history.push("/");
