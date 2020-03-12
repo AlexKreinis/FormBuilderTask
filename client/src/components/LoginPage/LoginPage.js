@@ -1,18 +1,16 @@
 import React from "react";
 import GitHubLogin from "react-github-login";
-import axios from "axios";
-import Button from "@material-ui/core/Button";
+import { LoginWithGithub } from "./actions/LoginActions";
 
-const LoginPage = () => {
+const LoginPage = ({ history }) => {
   const onSuccess = suc => {
-    console.log("success", suc);
-    LoggingIn(suc.code);
+    console.log(suc.code);
+    LoginWithGithub(suc.code);
+    history.push("/FormListPage");
   };
   const onFailure = res => {
     console.log("failed", res);
   };
-
-  const loggingIn = async token => {};
 
   return (
     <div>
@@ -20,7 +18,7 @@ const LoginPage = () => {
         clientId="e9f1e9e4962a75bb1f90"
         onSuccess={onSuccess}
         onFailure={onFailure}
-        redirectUri="http://localhost:3000/"
+        redirectUri="http://localhost:3000/testred"
       />
     </div>
   );

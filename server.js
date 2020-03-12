@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json({ extended: false }));
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 app.use("/api/form", require("./routes/api/FormAPI"));
+app.use("/api/auth", require("./routes/api/AuthAPI"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
