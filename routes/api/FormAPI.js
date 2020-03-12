@@ -11,8 +11,9 @@ const findAllForms = FormUtils.findAllForms;
 
 const successMessage = "Success";
 const ErrorMessage = "Error";
+const auth = require("../../middleware/auth");
 
-router.get("/getforms", async (req, res) => {
+router.get("/getforms", auth, async (req, res) => {
   try {
     let AllForms = await findAllForms();
     res.json(AllForms);
@@ -22,7 +23,7 @@ router.get("/getforms", async (req, res) => {
   }
 });
 
-router.get("/getform/:id", async ({ params }, res) => {
+router.get("/getform/:id", auth, async ({ params }, res) => {
   try {
     const forms = await findFormAndPopulate(params.id);
     res.json(forms);
@@ -31,7 +32,7 @@ router.get("/getform/:id", async ({ params }, res) => {
     res.status(404).json(ErrorMessage);
   }
 });
-router.put("/addformdata", async ({ body }, res) => {
+router.put("/addformdata", auth, async ({ body }, res) => {
   try {
     let FormDataArray = Object.values(body.formData);
     await FindFormFieldsAndAddData(FormDataArray);
@@ -42,7 +43,7 @@ router.put("/addformdata", async ({ body }, res) => {
     res.status(404).json(ErrorMessage);
   }
 });
-router.post("/addfields", async ({ body }, res) => {
+router.post("/addfields", auth, async ({ body }, res) => {
   try {
     await CreatingFormAndAddingFields(body);
     res.status(200).json(successMessage);
@@ -52,7 +53,7 @@ router.post("/addfields", async ({ body }, res) => {
   }
 });
 
-router.get("/getformdata/:id", async ({ params }, res) => {
+router.get("/getformdata/:id", auth, async ({ params }, res) => {
   try {
     const forms = await FindAndPopulateFormById(params.id);
     res.json(forms);
